@@ -63,7 +63,15 @@ class Deck extends Component {
         // BETTER to use this.position = position
     } // ctor
 
-    // Lifecycle method - 
+    // Lifecycle method - called when new Props are received by Component
+    componentWillReceiveProps(nextProps) {
+        // reset the state index, if new data (list of Cards)
+        if (nextProps.data !== this.props.data) {
+            this.setState({ index: 0 });
+        }
+    }
+
+    // Lifecycle method - when Component will be updated
     componentWillUpdate() {
         // next line for Android only
         UIManager.setLayoutAnimationEnabledExperimental && 
