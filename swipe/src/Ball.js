@@ -10,7 +10,7 @@ class Ball extends Component {
         // final position, with animation
         Animated.spring(this.position, {
             toValue: { x: 200, y: 500 }             // new position
-        }).start();                                 // default: x seconds
+        }).start();                                 // default: 1 seconds
     }
 
     // main render
