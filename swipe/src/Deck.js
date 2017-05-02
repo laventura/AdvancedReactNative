@@ -134,9 +134,9 @@ class Deck extends Component {
             // else, just render the card (w/o panHandlers)
             // pass in thru a View to apply our cardStyle
             return (
-                <View key={item.id} style={styles.cardStyle}>
+                <Animated.View key={item.id} style={styles.cardStyle}>
                     {this.props.renderCard(item)}
-                </View>
+                </Animated.View>
             );
         }).reverse(); // put bottom most item at the top
     }
