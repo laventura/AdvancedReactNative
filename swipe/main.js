@@ -23,7 +23,8 @@ const DATA = [
 // main class App
 class App extends React.Component {
 
-  // render each Card
+  // render each Card: callback func passed to Deck component
+  // the 'item' is a data structure as defined in DATA above (with id, text, and uri props)
   renderCard(item) {
     return (
       <Card
@@ -43,6 +44,21 @@ class App extends React.Component {
     );
   }
 
+  // no more cards: callback func passed to Deck component
+  renderNoMoreCards() {
+    return (
+      <Card title="😀 All Done!">
+        <Text style={{ marginBottom: 10 }}>
+          There's no more cards to show 👍
+        </Text>
+        <Button
+          backgroundColor="#03A9F4"
+          title="Get More!"
+        />
+      </Card>
+    );
+  }
+
   // main render
   render() {
     return (
@@ -50,6 +66,7 @@ class App extends React.Component {
         <Deck  
           data={DATA}
           renderCard={this.renderCard}
+          renderNoMoreCards={this.renderNoMoreCards}
         />
       </View>
     );
