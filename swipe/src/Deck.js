@@ -3,7 +3,9 @@ import {
      View, 
      Animated,
      PanResponder,
-     Dimensions
+     Dimensions,
+     LayoutAnimation, 
+     UIManager
 } from 'react-native';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -60,6 +62,15 @@ class Deck extends Component {
         this.state = { panResponder, position, index: 0 };
         // BETTER to use this.position = position
     } // ctor
+
+    // Lifecycle method - 
+    componentWillUpdate() {
+        // next line for Android only
+        UIManager.setLayoutAnimationEnabledExperimental && 
+        UIManager.setLayoutAnimationEnabledExperimental(true);
+        // tell RN to animate the changes made to the Component itself
+        LayoutAnimation.spring();
+    }
 
 
     // 
@@ -133,8 +144,12 @@ class Deck extends Component {
             }
             // else, just render the card (w/o panHandlers)
             // pass in thru a View to apply our cardStyle
+            // Stack the cards by specifying the 'top' value
             return (
-                <Animated.View key={item.id} style={styles.cardStyle}>
+                <Animated.View 
+                  key={item.id} 
+                  style={[styles.cardStyle, { top: 10 * (ix - this.state.index) }]}
+                >
                     {this.props.renderCard(item)}
                 </Animated.View>
             );
