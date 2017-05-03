@@ -1,0 +1,15 @@
+{
+  "name": "firebase-auth",
+  "version": "0.0.0",
+  "description": "Hello Expo!",
+  "author": null,
+  "private": true,
+  "main": "main.js",
+  "dependencies": {
+    "axios": "^0.16.1",
+    "react-native-elements": "^0.10.2",
+    "expo": "16.0.0",
+    "react": "16.0.0-alpha.6",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-16.0.0.tar.gz"
+  }
+}
