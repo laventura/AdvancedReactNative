@@ -1,0 +1,9 @@
+one-time-password-106aa-firebase-adminsdk-uwnjb-31d894713a.json
+node_modules/**/*
+*/node_modules/**/*
+.expo/*
+npm-debug.*
+service_account.json
+*/service_account.json
+twilio.js 
+functions/twilio.js
