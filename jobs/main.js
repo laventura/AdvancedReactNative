@@ -3,6 +3,11 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 
+// Redux stuff
+import { Provider } from 'react-redux'; 
+
+import store from './store';
+
 // local 
 import AuthScreen from './screens/AuthScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
@@ -29,10 +34,19 @@ class App extends React.Component {
           }
         })
       }
+    }, {
+      // config options for the outer TabNavigator
+      // lazily load the FB Auth login
+      navigationOptions: {
+        tabBarVisible: false
+      },
+      lazy: true
     });
 
     return (
+      <Provider store={store}>
         <MainNavigator />
+      </Provider>
     );
   }
 }
