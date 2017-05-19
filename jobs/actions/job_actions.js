@@ -6,18 +6,22 @@ import qs from 'qs'; // for query string construction
 
 // new Action type
 import {
-    FETCH_JOBS
+    FETCH_JOBS,
+    LIKE_JOB,
+    CLEAR_LIKED_JOBS
 } from './types';
 
 const JOB_ROOT_URL = 'http://api.indeed.com/ads/apisearch?';
 
 // params for Job search: radius (miles), latlong (1 = return latlong), q (search term), 
+// limit (max # jobs to return in each query)
 const JOB_QUERY_PARAMS = {
     publisher: '3140900416013473',
     format: 'json',
     v: '2',
     latlong: 1,
-    radius: 20,
+    radius: 30,
+    limit: 25,
     q: 'swift'
 };
 
@@ -28,26 +32,45 @@ const buildJobsUrl = (zip) => {
     return `${JOB_ROOT_URL}${query}`;  
 };
 
-// Fetch Jobs Action (concise format)
-export const fetchJobs = (region) =>  async (dispatch) => {
+// Action: Fetch Jobs Action (concise format)
+export const fetchJobs = (region, callback) =>  async (dispatch) => {
     // 'region' prop contains lat/long info - so just pass region as-is
     try { 
         // 1 - convert from lat/long to zip code
-        console.log(' JobActions: converting region to zip');
+        // console.log(' JobActions: converting region to zip');
         let zip = await reverseGeocode(region);
-        console.log('convert region to zip', region, zip); // debug
+        // console.log('convert region to zip', region, zip); // debug
 
         // 2 - get job search query URL
         const url = buildJobsUrl(zip);
-        console.log('Searching for:', url); // debug
+        console.log('Searching Jobs for:', url); // debug
 
         // 3 - make actual REST API request
         let { data } = await axios.get(url);
 
         // 4 - dispatch Action - pass all data we got from REST
         dispatch({ type: FETCH_JOBS, payload: data }); 
-        console.log(data);  // debug
+
+        // 5 - call the callback (Nav to Deck Screen)
+        callback();
+        // console.log(data);  // debug
     } catch (e) {
         console.error(e);
     }
+};
+
+// Action: Like a Job - Action
+export const likeJob = (job) => {
+    return {
+        payload: job,
+        type:    LIKE_JOB
+    };
+};
+
+// Action: - CLEAR_LIKED_JOBS
+export const clearLikedJobs = () => {
+    // no async, no payload
+    return {
+        type: CLEAR_LIKED_JOBS
+    };
 };

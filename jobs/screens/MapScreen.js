@@ -33,7 +33,9 @@ class MapScreen extends Component {
     // button press - fire off a query to Indeed
     onButtonPress = () => {
         // fire off the action to Indeed - via the action creator, passing in this region
-        this.props.fetchJobs(this.state.region);
+        this.props.fetchJobs(this.state.region, () => {
+            this.props.navigation.navigate('deck'); // NAV to Deck Screen
+        });
     }
 
     // main render
