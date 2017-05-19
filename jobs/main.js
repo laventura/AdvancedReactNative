@@ -32,6 +32,10 @@ class App extends React.Component {
               settings: { screen: SettingsScreen }
             })
           }
+        }, { // 2nd arg to TabNavigator
+          tabBarOptions: {
+            labelStyle: { fontSize: 12 }
+          }
         })
       }
     }, {

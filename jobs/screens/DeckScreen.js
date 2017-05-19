@@ -2,13 +2,22 @@ import React, { Component } from 'react';
 import { View, Text, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
-import { Card, Button } from 'react-native-elements';
+import { Card, Button, Icon } from 'react-native-elements';
 
 // local
 import Swipe from '../components/Swipe';    // our Deck of Cards made earlier
 import * as actions from '../actions';
 
 class DeckScreen extends Component {
+
+    // when React Navigation navigates to this component, it check these navOptions
+    // to decide how to render the component on navbar 
+    static navigationOptions = {
+        title: 'Jobs',
+         tabBarIcon: ({ tintColor }) => {
+            return <Icon name="description" size={30} color={tintColor} />;
+        }
+    }
 
     // show a single job
     renderCard(job) {
@@ -55,6 +64,7 @@ class DeckScreen extends Component {
                     large
                     icon={{ name: 'my-location' }}
                     backgroundColor="#03A9F4"
+                    raised={true}
                     onPress={() => this.props.navigation.navigate('map')}
                 />
             </Card>

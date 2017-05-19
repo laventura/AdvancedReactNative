@@ -2,12 +2,22 @@ import React, { Component } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 import { MapView } from 'expo';  // this encapsulates AirBnB's React-Native MapView
 import { connect } from 'react-redux';
-import { Button } from 'react-native-elements';
+import { Button, Icon } from 'react-native-elements';
 // local 
 import * as actions from '../actions';
 
 
 class MapScreen extends Component {
+
+    // when React Navigation navigates to this component, it check these navOptions
+    // to decide how to render the component on navbar 
+    static navigationOptions = {
+        title: 'Map',
+        tabBarIcon: ({ tintColor }) => {
+            return <Icon name="my-location" size={30} color={tintColor} />;
+        }
+   }
+
     // component state (init val)
     state = {
         mapLoaded: false,
@@ -62,6 +72,7 @@ class MapScreen extends Component {
                         backgroundColor="#009688"
                         icon={{ name: 'search' }}
                         onPress={this.onButtonPress}
+                        raised={true}
                     />
                 </View>
             </View>
