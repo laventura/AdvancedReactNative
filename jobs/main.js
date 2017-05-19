@@ -33,6 +33,7 @@ class App extends React.Component {
             })
           }
         }, { // 2nd arg to TabNavigator
+          tabBarPosition: 'bottom', 
           tabBarOptions: {
             labelStyle: { fontSize: 12 }
           }
