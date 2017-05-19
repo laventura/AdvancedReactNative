@@ -42,9 +42,21 @@ class DeckScreen extends Component {
     }
 
     // callback - when no more jobs
-    renderNoMoreCards() {
+    // show a button - and nav to Map
+    // use arrow func () =>  because
+    // we want the Deckscreen to exec the func renderNoMoreCards(), not the SwipeScreen in this case,
+    // because, otherwise SwipeScreen does not have prop 'navigation', so it will complain
+
+    renderNoMoreCards = () => {
         return (
-            <Card title="No more jobs">
+            <Card title="No More Jobs">
+                <Button
+                    title="Back To Map"
+                    large
+                    icon={{ name: 'my-location' }}
+                    backgroundColor="#03A9F4"
+                    onPress={() => this.props.navigation.navigate('map')}
+                />
             </Card>
         );
     }

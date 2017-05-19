@@ -20,8 +20,8 @@ const JOB_QUERY_PARAMS = {
     format: 'json',
     v: '2',
     latlong: 1,
-    radius: 30,
-    limit: 25,
+    radius: 25,
+    limit: 20,
     q: 'swift'
 };
 
