@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { REHYDRATE } from 'redux-persist/constants';  // for redux-persist
 
 import {
     LIKE_JOB,
@@ -18,6 +19,11 @@ export default function (state = [], action) {
         case CLEAR_LIKED_JOBS:
             // remove everything from liked jobs
             return [];
+
+        // for persistifying store across app shutdown - 
+        // return the last action.payload.likedJobs, or empty [] if none
+        case REHYDRATE: 
+            return action.payload.likedJobs || [];
 
         default:
             return state;
